@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #app {
+            padding: 30px;
+        }
+
+        .box {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 666;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+        }
+        
+        .content {
+            padding: 30px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <button class="dialog">弹窗1</button>
+        <div class="box">
+            <div class="content">
+                <button class="close">关闭弹窗</button>
+                <p>我是内容</p> 
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>-->
+    <script src="../dist/javascripts/backtrack.min.js"></script>
+    <script>
+
+        $(function () {
+
+            backtrack(function (data) {
+                var self = this;
+
+                //弹窗层，返回0
+                $('.dialog').on('click.back', function () {
+                    self.setState(0);
+                });
+
+                //关闭弹窗层，返回-1
+                $('.close').on('click.back', function () {
+                    self.setState(-1);
+                });
+            }, function (state, page) {
+                this.go();
+            });
+
+            //显示弹窗
+            $('.dialog').on('click', function () {
+               $('.box').show();
+            });
+
+            //隐藏弹窗
+            $('.close').on('click', function () {
+                $('.box').hide();
+            });
+        });
+
+    </script>
+
+</body>
+</html>
