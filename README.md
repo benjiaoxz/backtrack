@@ -24,7 +24,7 @@ pages: [http://benjiaoxz.coding.me/backtrack/examples/index.html](http://benjiao
         $('.close').on('click.back', function () {
             self.setState(-1);
         });
-    }, function (state, page) {
+    }, function (page) {
         this.go();
     });
 
